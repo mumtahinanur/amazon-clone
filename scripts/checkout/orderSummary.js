@@ -167,6 +167,8 @@ export function renderOrderSummary() {
 
     container.classList.remove('is-editing-quantity');
 
+    renderPaymentSummary();
+
     updateCartQuantity();
   }
 
