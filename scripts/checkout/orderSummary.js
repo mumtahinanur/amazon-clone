@@ -5,7 +5,8 @@ import {products, getProduct} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
-import { renderPaymentSummary } from './paymentSummary.js';
+import {renderPaymentSummary} from './paymentSummary.js';
+import {renderCheckoutHeader} from './checkoutHeader.js';
 
 export function renderOrderSummary() {
   let cartSummaryHTML = '';
@@ -117,9 +118,8 @@ export function renderOrderSummary() {
         removeFromCart(productId);
 
         renderOrderSummary();
-
-        updateCartQuantity();
         renderPaymentSummary();
+        renderCheckoutHeader();
       });
     });
 
@@ -168,18 +168,8 @@ export function renderOrderSummary() {
     container.classList.remove('is-editing-quantity');
 
     renderPaymentSummary();
-
-    updateCartQuantity();
+    renderCheckoutHeader();
   }
-
-  function updateCartQuantity() {
-    const cartQuantity = calculateCartQuantity();
-
-    document.querySelector('.js-return-to-home-link')
-      .innerHTML = `${cartQuantity} items`;
-  }
-
-  updateCartQuantity();
 
   document.querySelectorAll('.js-delivery-option')
     .forEach((element) => {
