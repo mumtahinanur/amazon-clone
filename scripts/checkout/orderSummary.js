@@ -3,7 +3,6 @@ import {
 } from '../../data/cart.js';
 import {products, getProduct} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
-
 import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
 import {renderCheckoutHeader} from './checkoutHeader.js';
@@ -71,7 +70,7 @@ export function renderOrderSummary() {
 
     deliveryOptions.forEach((deliveryOption) => {
       const dateString = calculateDeliveryDate(deliveryOption);
-      
+
       const priceString = deliveryOption.priceCents === 0
         ? 'FREE'
         : `$${formatCurrency(deliveryOption.priceCents)} -`;
