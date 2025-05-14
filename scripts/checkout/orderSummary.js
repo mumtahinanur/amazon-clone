@@ -159,8 +159,9 @@ export function renderOrderSummary() {
 
     container.classList.remove('is-editing-quantity');
 
-    renderPaymentSummary();
     renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
   }
 
   document.querySelectorAll('.js-delivery-option')
