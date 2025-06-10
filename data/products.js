@@ -80,65 +80,6 @@ export class Appliance extends Product {
   }
 }
 
-export let products = [];
-
-export function loadProductsFetch() {
-  const promise = fetch(
-    'https://supersimplebackend.dev/products'
-  ).then((response) => {
-    return response.json();
-  }).then((productsData) => {
-    products = productsData.map((productDetails) => {
-      if (productDetails.type === 'appliance') {
-        return new Appliance(productDetails);
-      }
-      if (productDetails.type === 'clothing') {
-        return new Clothing(productDetails);
-      }
-      return new Product(productDetails);
-    });
-
-    console.log('load products');
-  }).catch((error) => {
-    console.log('unexpected error. try again later.');
-  });
-
-  return promise;
-}
-/*
-loadProductsFetch().then(() => {
-  console.log('next step');
-});
-*/
-
-export function loadProducts(fun) {
-  const xhr = new XMLHttpRequest();
-
-  xhr.addEventListener('load', () => {
-    products = JSON.parse(xhr.response).map((productDetails) => {
-      if (productDetails.type === 'appliance') {
-        return new Appliance(productDetails);
-      }
-      if (productDetails.type === 'clothing') {
-        return new Clothing(productDetails);
-      }
-      return new Product(productDetails);
-    });
-
-    console.log('load products');
-
-    fun();
-  });
-
-  xhr.addEventListener('error', (error) => {
-    console.log('unexpected error. try again later.');
-  });
-
-  xhr.open('GET', 'https://supersimplebackend.dev/products');
-  xhr.send();
-}
-
-/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -816,7 +757,7 @@ export const products = [
     name: "Backpack",
     rating: {
       stars: 4,
-      count: 767
+      counts: 767
     },
     priceCents: 5744
   },
@@ -826,7 +767,7 @@ export const products = [
     name: "Umbrella",
     rating: {
       stars: 4.5,
-      count: 76
+      counts: 76
     },
     priceCents: 2744
   }
@@ -839,4 +780,3 @@ export const products = [
   }
   return new Product(productDetails);
 });
-*/
